@@ -1,18 +1,148 @@
-<%- partial('_partial/head') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>天天FM</title>
+	<link type="image/x-icon" rel="shortcut icon" href="css/img/favicon.ico" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="renderer" content="webkit" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:type" content="audio" />
+	<meta property="og:url" content="url=http://www.xiami.com/play?ids=/song/playlist/id/1773859142" />
+	<meta property="og:title" content="xxxxxx" />
+	<meta property="og:description" content="音频的文字描述" />
+
+	<script type="text/javascript">
+		if (/iPhone|Android|ipod|wap|mobile/i.test(navigator.userAgent) && !/type=(singer|album|song)&m?id/i.test(location.hash) && !/type=(topic|toplist|taoge|mymusic)/i.test(location.hash) ) {
+				var param = location.href.split('?');
+		    	location.href = 'm_share.html?'+param[1];
+			}
+		
+	</script>
+	<link rel="stylesheet" type="text/css"  href="css/share.css?version=1.27.1" />
+</head>
 <body>
-  <div id="container">
-    <div id="wrap">
-      <%- partial('_partial/header', null, {cache: !config.relative_link}) %>
-      <div class="outer">
-        <section id="main"><%- body %></section>
-        <% if (theme.sidebar && theme.sidebar !== 'bottom'){ %>
-          <%- partial('_partial/sidebar', null, {cache: !config.relative_link}) %>
-        <% } %>
-      </div>
-      <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
-    </div>
-    <%- partial('_partial/mobile-nav', null, {cache: !config.relative_link}) %>
-    <%- partial('_partial/after-footer') %>
-  </div>
+	<div id="play-box"></div>
+	<div class="header">
+		<div class="wrap">
+			<div class="clear">
+				<h1><span class="logo icon-player-logo"></span><span class="red">天天FM</span></h1>
+				<div class="list">
+					<div class="txt">扫描二维码<br>分享给好友</div>
+					<div class="twocode"><img src="css/img/share/code.png" alt=""></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="banner">
+		<div class="wrap">
+			<div class="hot clear">
+				<div class="hot-main">
+					<div class="pic"><img src="" width="320" height="320" alt=""></div>
+					<div class="player-main">
+						<div class="title channelName"></div>
+						<div class="song-info">
+							<span class="song"></span>
+							<span>&nbsp;-&nbsp;</span>
+							<span class="singer"></span>
+						</div>
+						<div class="player-bar">
+							<div class="play-time">00:00</div>
+							<div class="play-line">
+								<div class="loading-line"></div>
+								<div class="playing-line"></div>
+							</div>
+							<div class="total-time">00:00</div>
+						</div>
+						<div class="btn pause"></div>
+						<a href="javascript:;" class="next"></a>
+					</div>
+				</div>
+				<div id="scrollbar1">
+					<div class="scrollbar disable">
+						<div class="track">
+							<div class="thumb">
+								<div class="end"></div>
+							</div>
+						</div>
+					</div>
+					<div class="viewport">
+						<div class="overview">
+							<ul class="lrc-box"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="wrap clear">
+		<div class="cont">
+			<div class="share">
+				<div class="bdsharebuttonbox" data-tag="share_1">
+					<label class="label">分享到：</label>
+					<div class="share-icons">
+						<a class="bds_tsina" data-cmd="tsina"></a>
+						<a class="bds_qzone" data-cmd="qzone"></a>
+					</div>
+				</div>	
+			</div>
+			<div class="post-main">
+				<ul class="discuss m-list"></ul>
+				<div class="page">
+					<div class="page-go">
+						<div class="txt">跳转到：</div>
+						<div class="page-jump">
+							<input type="text">
+							<a href="javascript:;">go</a>
+						</div>
+					</div>
+					<div class="page-nav"></div>
+				</div>
+			</div>			
+		</div>
+		<div class="hot-detail"></div>
+	</div>
+	<footer class="footer">
+		<div class="wrap">
+			<div class="footer-bottom">
+	            <div class="fotter-copyright">
+	                <p>Copyright © 2007 - 2014 TTPod , All Rights Reserved 上海水渡石信息技术有限公司 版权所有</p>
+	                <p>
+	                    <a target="_blank" href="http://www.miibeian.gov.cn/">沪ICP备07024808号</a>  
+	                    沪网文[2014]0030-030  ICP经营许可证号沪B2-20120086  营业性演出许可证沪文演(经)00-0692-1
+	                </p>
+	            </div>
+        	</div>
+		</div>
+	</footer>
+	<div class="mask">
+		<a class="close" href="javascript:;"></a>
+		<div class="auto"></div>
+	</div>
+	<div class="loading hidden"></div>
+	<script src="js/vendor/require/require.js"></script>
+	<script src="js/config.js?version=1.27.1"></script>
+	<script>
+	    require(['share/share'],function(share){
+	    	share.init();
+	    });
+    </script>
+    <!--百度统计-->
+	<script type="text/javascript">
+		var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+		document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fed1cf7359fec48346ca6921c1b10c7e9' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<!--百度统计end-->
+	<!--谷歌统计-->
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-54044033-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+	<!--谷歌统计end-->
 </body>
 </html>
